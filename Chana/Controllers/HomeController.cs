@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Chana.Models;
+using chanenetWcf;
 
 namespace Chana.Controllers
 {
@@ -32,6 +33,17 @@ namespace Chana.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public JsonResult SentNotifyMessage(string Message)
+        {
+            ServiceInterfaceClient client = new ServiceInterfaceClient();
+            //ProcessResoult processResoult1 = new ProcessResoult();
+            ProcessResoult pr = client.sentNotifyAsync(Message).Result;
+            
+            //return Json((object)data, JsonRequestBehavior.AllowGet);
+            return Json(pr);
         }
     }
 }
