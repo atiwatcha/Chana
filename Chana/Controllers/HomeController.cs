@@ -39,10 +39,7 @@ namespace Chana.Controllers
         public JsonResult SentNotifyMessage(string Message)
         {
             ServiceInterfaceClient client = new ServiceInterfaceClient();
-            //ProcessResoult processResoult1 = new ProcessResoult();
             ProcessResoult pr = client.sentNotifyAsync(Message).Result;
-            
-            //return Json((object)data, JsonRequestBehavior.AllowGet);
             return Json(pr);
         }
     }
