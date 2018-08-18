@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Chana.Models;
 using chanenetWcf;
 
+
 namespace Chana.Controllers
 {
     public class HomeController : Controller
@@ -40,6 +41,14 @@ namespace Chana.Controllers
         {
             ServiceInterfaceClient client = new ServiceInterfaceClient();
             ProcessResoult pr = client.sentNotifyAsync(Message).Result;
+            return Json(pr);
+        }
+
+        [HttpGet]
+        public JsonResult SentMessage(string Message)
+        {
+            ChananetWcfSvc.ServiceInterfaceClient client = new ChananetWcfSvc.ServiceInterfaceClient();
+            ChananetWcfSvc.ProcessResoult pr = client.sentNotifyAsync(Message).Result;
             return Json(pr);
         }
     }
